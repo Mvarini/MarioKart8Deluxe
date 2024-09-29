@@ -13,9 +13,11 @@ class DefeatController extends Controller
 {
     public function index()
     {
+        $users = User::all();
+
         $defeats = Defeat::orderBy('date_at', 'desc')->get();
 
-        return view('defeats.index', ['defeats' => $defeats]);
+        return view('defeats.index', ['defeats' => $defeats, 'users' => $users]);
     }
 
     public function create()
