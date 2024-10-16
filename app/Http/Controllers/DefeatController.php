@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DefeatRequest;
 use App\Models\Defeat;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -15,9 +16,9 @@ class DefeatController extends Controller
     {
         $users = User::all();
 
-        $defeats = Defeat::orderBy('date_at', 'desc')->get();
+        $defeats = Defeat::orderBy('date_at', 'desc')->paginate(10);
 
-        return view('defeats.index', ['defeats' => $defeats, 'users' => $users]);
+        return view('defeats.index', ['defeats' => $defeats, 'users' => $users, 'menu' => 'defeatActiveMenu']);
     }
 
     public function create()
@@ -34,16 +35,20 @@ class DefeatController extends Controller
 
     public function store(DefeatRequest $request)
     {
+
         $request->validated();
 
-        DB::beginTransaction();
-
         try {
+
+            DB::beginTransaction();
+
+            list($d, $m, $y) = explode('/', $request->date_at);
+
             $defeat = Defeat::create([
                 'user_id' => $request->user_id,
                 'harmed' => $request->harmed,
                 'pain' => $request->pain,
-                'date_at' => $request->date_at
+                'date_at' => $y . '-' . $m . '-' . $d,
             ]);
 
             DB::commit();
@@ -56,7 +61,7 @@ class DefeatController extends Controller
 
             Log::error('Erro ao cadastrar Derrota:', ['error' => $ex->getMessage()]);
 
-            return back()->withInput()->with('error', 'Erro ao cadastrar a derrota');
+            return back()->withInput()->with('error', 'Derrota não cadastrada, contate o administrador!');
         }
     }
 
@@ -69,16 +74,20 @@ class DefeatController extends Controller
 
     public function update(DefeatRequest $request, Defeat $defeat)
     {
+
         $request->validated();
 
-        DB::beginTransaction();
-
         try {
+
+            DB::beginTransaction();
+
+            list($d, $m, $y) = explode("/", $request->date_at);
+
             $defeat->update([
                 'user_id' => $request->user_id,
                 'harmed' => $request->harmed,
                 'pain' => $request->pain,
-                'date_at' => $request->date_at
+                'date_at' => $y . '-' . $m . '-' . $d,
             ]);
 
             DB::commit();
@@ -91,15 +100,17 @@ class DefeatController extends Controller
 
             Log::error('Derrota não atualizada', ['error' => $ex->getMessage()]);
 
-            return back()->withInput()->with('error', 'Erro ao atualizar a derrota');
+            return back()->withInput()->with('error', 'Derrota não atualizada, contate o administrador!');
         }
     }
 
     public function destroy(Defeat $defeat)
     {
-        DB::beginTransaction();
 
         try {
+
+            DB::beginTransaction();
+
             $defeat->delete();
 
             DB::commit();
@@ -112,7 +123,7 @@ class DefeatController extends Controller
 
             Log::error('Erro ao excluir Derrota:', ['error' => $ex->getMessage()]);
 
-            return back()->withInput()->with('error', 'Erro ao excluir a derrota');
+            return back()->withInput()->with('error', 'Derrota não excluída, contate o administrador!');
         }
     }
 }

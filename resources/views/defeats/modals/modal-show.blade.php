@@ -14,7 +14,7 @@
                             <dt class="col-md-2">ID:</dt>
                             <dd class="col-md-10">{{ $defeat->id }}</dd>
 
-                            <dt class="col-md-2">Nome:</dt>
+                            <dt class="col-md-2">Perdedor:</dt>
                             <dd class="col-md-10">{{ $defeat->user->name }}</dd>
 
                             <dt class="col-md-2">Algoz:</dt>

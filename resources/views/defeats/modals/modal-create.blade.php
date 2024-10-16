@@ -11,7 +11,7 @@
                     @csrf
                     @method('POST')
 
-                    <x-alert/>
+{{--                    <x-alert/>--}}
 
                     <div class="col-md-6">
                         <label for="user_id" class="form-label">Perdedor</label>
@@ -48,14 +48,12 @@
 
                     <div class="col-md-6">
                         <label for="date_at" class="form-label">Data</label>
-                        <input type="date" name="date_at" id="date_at" class="form-control" value="{{ old('date_at') }}" required/>
+                        <input type="text" name="date_at" id="date_at" class="form-control date" value="{{ old('date_at', date('d/m/Y')) }}" required/>
                     </div>
-
 
                     <div class="col-12 d-flex justify-content-end mt-5">
                         <button type="submit" class="btn btn-primary">Adicionar</button>
                     </div>
-
                 </form>
             </div>
         </div>

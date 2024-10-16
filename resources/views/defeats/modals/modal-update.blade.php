@@ -64,7 +64,7 @@
 
                             <div class="col-md-6">
                                 <label for="date_at" class="form-label">Data</label>
-                                <input type="date" name="date_at" id="date_at" class="form-control" value="{{ old('date_at', $defeat->date_at) }}" placeholder="Data" required/>
+                                <input type="text" name="date_at" id="date_at" class="form-control date" value="{{ old('date_at', \Carbon\Carbon::parse($defeat->date_at)->format('d/m/Y')) }}" placeholder="Data" required/>
                             </div>
 
                             <div class="col-12 d-flex justify-content-end mt-5">

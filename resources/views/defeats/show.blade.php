@@ -14,7 +14,6 @@
     {{--                <span>Detalhes</span>--}}
     {{--            </div>--}}
     {{--            <div class="card-body">--}}
-    @
     <dl class="row">
         <dt class="col-md-2">ID:</dt>
         <dd class="col-md-10">{{ $defeat->id }}</dd>

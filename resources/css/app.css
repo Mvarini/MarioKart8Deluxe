@@ -1,0 +1,6 @@
+/*Importar o CSS do template*/
+@import "sbadmin.css";
+
+/*Importar os ícones*/
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+

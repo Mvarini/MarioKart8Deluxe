@@ -1,0 +1,11 @@
+/*Importar os ícones*/
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+/*Importa o estilo do template AI*/
+@import "./web/lib/animate/animate.min.css";
+@import "./web/lib/owlcarousel/assets/owl.carousel.min.css";
+@import "./web/css/bootstrap.min.css";
+@import "./web/css/style.css";
+
+
+

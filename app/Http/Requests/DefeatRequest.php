@@ -25,7 +25,7 @@ class DefeatRequest extends FormRequest
             'user_id' => 'required',
             'harmed' => 'required',
             'pain' => 'required',
-            'date_at' => 'required|date|max:10',
+            'date_at' => 'required|max:10',
         ];
     }
 
@@ -39,7 +39,6 @@ class DefeatRequest extends FormRequest
             'pain.required' => 'O campo castigo é obrigatório',
             'date_at' => [
                 'required' => 'O campo data é obrigatório',
-                'date' => 'O campo data precisa ser uma data válida!',
                 'max' => 'O campo data excedeu ao máximo de :max caracteres!',
             ],
         ];

@@ -9,7 +9,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid px-4">
+                    <div class="container-fluid px-3">
 
                         <div>
                             <p>Tem certeza em excluir os dados abaixo?</p>
@@ -37,7 +37,6 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Sim, excluir!</button>
                     </form>
-
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Jogador</th>
+                        <th>Perdedor</th>
                         <th>Algoz</th>
                         <th>Castigo</th>
                         <th>Data</th>
@@ -36,24 +36,16 @@
                             <td class="align-middle">{{ $defeat->pain }}</td>
                             <td class="align-middle"> {{ \Carbon\Carbon::parse($defeat->date_at)->format('d/m/Y') }}</td>
                             <td class="d-md-flex flex-row justify-content-center">
-
-                                <a  data-bs-toggle="modal"
-                                   data-bs-target="#formShow{{ $defeat->id }}"
-                                   class="btn btn-outline-info border-0 btn-sm me-2 mb-2 mb-md-0 showDefeat">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-
-                                <a data-bs-toggle="modal"
-                                   data-bs-target="#formUpdate{{ $defeat->id }}"
-                                    class="btn btn-outline-warning border-0 btn-sm me-2 mb-2 mb-md-0">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-
-                                <a data-bs-toggle="modal"
-                                   data-bs-target="#formDelete{{ $defeat->id }}"
-                                   class="btn btn-outline-danger border-0 btn-sm me-2 mb-2 mb-md-0">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formShow{{ $defeat->id }}" href="#">Visualizar</a></li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formUpdate{{ $defeat->id }}" href="#">Editar</a></li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formDelete{{ $defeat->id }}" href="#">Excluir</a></li>
+                                    </ul>
+                                </div>
                             </td>
                         </tr>
                     @empty
@@ -65,7 +57,12 @@
                 </table>
             </div>
         </div>
+        {{ $defeats->onEachSide(5)->links() }}
     </div>
+    @include('defeats.modals.modal-create')
+    @include('defeats.modals.modal-show')
+    @include('defeats.modals.modal-update')
+    @include('defeats.modals.modal-delete')
 @endsection
 
 

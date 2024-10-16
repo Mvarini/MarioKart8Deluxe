@@ -10,6 +10,6 @@
 <body>
     <h1>Mario Kart 8 - Deluxe</h1>
 
-    <a href="{{ route('defeat.index') }}"><button type="button">Ir para as derrotas</button></a>
+    <a href="{{ route('dashboard.index') }}"><button type="button">Dashboard</button></a>
 </body>
 </html>
