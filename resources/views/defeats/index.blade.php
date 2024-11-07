@@ -9,15 +9,30 @@
             </ol>
         </div>
         <div class="card mb-4 shadow-sm">
-            <div class="card-header d-flex justify-content-between">
-                <div>
+            <div class="card-header d-flex">
+                <div class="flex-grow-1">
                     <span class="align-middle">Listar</span>
                 </div>
-                <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                   data-bs-target="#formCreate">Adicionar</a>
+                <div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ações
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item btn btn-dark" data-bs-toggle="modal"
+                                   data-bs-target="#formImportCSV">Importar CSV</a></li>
+                            <li><a class="dropdown-item btn btn-warning" data-bs-toggle="modal"
+                                   data-bs-target="#formSearchDefeat">Pesquisar</a></li>
+                            <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
+                                   data-bs-target="#formCreate">Adicionar</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
+
                 <x-alert/>
+
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -49,20 +64,22 @@
                             </td>
                         </tr>
                     @empty
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-warning" role="alert">
                             Nenhuma derrota encontrada!
                         </div>
                     @endforelse
                     </tbody>
                 </table>
+                {{ $defeats->onEachSide(0)->links() }}
             </div>
         </div>
-        {{ $defeats->onEachSide(5)->links() }}
     </div>
     @include('defeats.modals.modal-create')
     @include('defeats.modals.modal-show')
     @include('defeats.modals.modal-update')
     @include('defeats.modals.modal-delete')
+    @include('defeats.modals.modal-importcsv')
+    @include('defeats.modals.modal-searchdefeats')
 @endsection
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Imports\UserImport;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
@@ -10,11 +11,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+
+use function Laravel\Prompts\select;
 
 class UserController extends Controller
 {
     public function index()
     {
+
         $users = User::orderBy('name', 'asc')->paginate(10);
 
         return view('users.index', ['users' => $users, 'menu' => 'userActiveMenu']);
@@ -60,9 +65,9 @@ class UserController extends Controller
     {
         $request->validated();
 
-        DB::beginTransaction();
-
         try {
+            DB::beginTransaction();
+
             // Se existir a imagem no request
             if ($request->hasFile('image')) {
                 //Pegar o arquivo e move para o diretório users em store
@@ -79,7 +84,7 @@ class UserController extends Controller
                 'nickname' => $request->nickname,
                 'birthday' => Carbon::parse(str_replace(['-', '/'], ['', '-'], $request->birthday))->format('Y-m-d'),
                 'email' => $request->email,
-                'image' => $request->hasFile('image') ? $requestImage : $request->image,
+                'image' => $request->hasFile('image') ? $requestImage : $user->image,
             ]);
 
             DB::commit();
@@ -155,5 +160,22 @@ class UserController extends Controller
 
             return back()->withInput()->with('error', 'Senha não atualizada, contate o administrador');
         }
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'excel' => 'required|mimes:xls,xlsx|max:4096'
+        ],[
+            'excel.required' => 'Nenhum arquivo foi selecionado!',
+            'excel.mimes' => 'Selecione apenas arquivo de excel com extenção: xls ou xlsx!',
+            'excel.max' => 'Tamanho máximo de :max Mb excedido!'
+        ]);
+
+//        dd($request);
+
+       Excel::import(new UserImport, $request->file('excel'));
+
+        return redirect()->back()->with('success', 'Arquivo de excel importado com sucesso!' );
     }
 }

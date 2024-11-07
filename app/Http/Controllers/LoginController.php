@@ -24,9 +24,19 @@ class LoginController extends Controller
 
         // Caso não seja autenticado
         if (!$userAuth) {
-            return redirect()->route('web.index');
+            return redirect()->route('web.index')->with('error', 'E-mail e/ou senha incorretos!');
         }
 
         return redirect()->route('dashboard.index');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('web.index');
     }
 }

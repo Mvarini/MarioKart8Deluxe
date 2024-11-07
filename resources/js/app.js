@@ -13,4 +13,8 @@ import Inputmask from "inputmask";
 
 import './mask-inputmask.js';
 
+// Chart js
+import Chart from 'chart.js/auto';
+window.Chart = Chart;
 
+import './chart.js';

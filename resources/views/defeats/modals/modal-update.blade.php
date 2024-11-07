@@ -67,8 +67,8 @@
                                 <input type="text" name="date_at" id="date_at" class="form-control date" value="{{ old('date_at', \Carbon\Carbon::parse($defeat->date_at)->format('d/m/Y')) }}" placeholder="Data" required/>
                             </div>
 
-                            <div class="col-12 d-flex justify-content-end mt-5">
-                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                            <div class="col-12 d-flex justify-content-end mt-3">
+                                <button type="submit" class="btn btn-primary btn-sm">Atualizar</button>
                             </div>
                         </form>
                     </div>

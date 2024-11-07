@@ -10,11 +10,23 @@
             </ol>
         </div>
         <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between">
-                <div>
+            <div class="card-header d-flex">
+                <div class="flex-grow-1">
                     <span class="align-middle">Listar</span>
                 </div>
-                <a data-bs-toggle="modal" data-bs-target="#userCreateForm" class="btn btn-primary btn-sm">Adicionar</a>
+                <div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ações
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a data-bs-toggle="modal" data-bs-target="#userImportExcel" class="dropdown-item btn btn-dark">Importar
+                                    Excel</a></li>
+                            <li><a data-bs-toggle="modal" data-bs-target="#userCreateForm"
+                                   class="dropdown-item btn btn-primary">Adicionar</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="card-body shadow-sm">
                 <x-alert/>
@@ -30,36 +42,44 @@
                     @forelse($users as $user)
                         <tbody>
                         <tr>
-                            <td>{{ $user->name }}</td>
-                            <td class="d-none d-md-table-cell">{{ $user->email }}</td>
+                            <td class="align-middle">{{ $user->name }}</td>
+                            <td class="d-none d-md-table-cell align-middle">{{ $user->email }}</td>
                             <td class="text-center">
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-outline-dark border-0" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#userUpdatePasswordForm{{ $user->id }}" href="#">Senha</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#userShowForm{{ $user->id }}" href="#">Visualizar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#userUpdateForm{{ $user->id }}" href="#">Editar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#userDeleteForm{{ $user->id }}" href="#">Excluir</a></li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal"
+                                               data-bs-target="#userUpdatePasswordForm{{ $user->id }}"
+                                               href="#">Senha</a></li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal"
+                                               data-bs-target="#userShowForm{{ $user->id }}" href="#">Visualizar</a>
+                                        </li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal"
+                                               data-bs-target="#userUpdateForm{{ $user->id }}" href="#">Editar</a></li>
+                                        <li><a class="dropdown-item" data-bs-toggle="modal"
+                                               data-bs-target="#userDeleteForm{{ $user->id }}" href="#">Excluir</a></li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     @empty
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-warning" role="alert">
                             Nenhum usuário encontrado!
                         </div>
                     @endforelse
                 </table>
+                {{ $users->onEachSide(0)->links() }}
             </div>
         </div>
-        {{ $users->onEachSide(5)->links() }}
     </div>
     @include('users.modal.modal-create')
     @include('users.modal.modal-show')
     @include('users.modal.modal-update')
     @include('users.modal.modal-delete')
     @include('users.modal.modal-updatePassword')
+    @include('users.modal.modal-importexcel')
 @endsection

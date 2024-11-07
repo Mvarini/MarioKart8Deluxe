@@ -10,7 +10,8 @@
             <select name="user_id" id="user_id" class="form-select">
                 <option value="">Selecione o perdedor</option>
                 @foreach($users as $user)
-                    <option {{ old('user_id') == $user->id ? "selected" : "" }} value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option
+                        {{ old('user_id') == $user->id ? "selected" : "" }} value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
             </select>
         </div>

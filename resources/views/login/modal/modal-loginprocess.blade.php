@@ -27,11 +27,11 @@
                     </div>
 
                     <div class="col-12">
-                        <span>Esquceu sua senha?</span><a href="#"> Clique aqui.</a>
+                        <span>Esquceu sua senha?</span><a href="{{ route('forgot.password-show') }}"> Clique aqui.</a>
                     </div>
 
                     <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Entrar</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
                     </div>
                 </form>
             </div>

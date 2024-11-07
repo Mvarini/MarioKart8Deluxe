@@ -13,14 +13,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Ubuntu:wght@500;700&display=swap"
           rel="stylesheet">
 
-    @vite(['resources/css/app_web.css', 'resources/js/app_web.js'])
+    {{--    @vite(['resources/css/app_web.css', 'resources/js/app_web.js'])--}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
+    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/web/lib/animate/animate.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/web/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/web/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/web/css/style.css') }}" rel="stylesheet"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
 
 <!-- Navbar Start -->
 <div class="container-fluid sticky-top">
+    <x-alert/>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark p-0">
             <a href="{{ route('web.index') }}" class="navbar-brand">
@@ -37,15 +46,25 @@
                     <a href="#castigos" class="nav-item nav-link">Castigo</a>
                     <a href="#partidas" class="nav-item nav-link">Partidas</a>
                     <a href="#jogadores" class="nav-item nav-link">Jogadores</a>
-{{--                    @if(Auth::check())--}}
-{{--                        <a  href="{{ route('dashboard.index') }}" type="button" class="nav-item nav-link btn btn-dark px-3">--}}
-{{--                            Acessar--}}
-{{--                        </a>--}}
-{{--                    @else--}}
-                    <a type="button" class="nav-item nav-link btn btn-dark px-3" data-bs-toggle="modal" data-bs-target="#loginProcess">
-                        Entrar
-                    </a>
-{{--                    @endif--}}
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Restrito</a>
+                        <div class="dropdown-menu bg-light mt-2">
+                            @if(Auth::check())
+                                <a href="{{ route('dashboard.index') }}" type="button"
+                                   class="dropdown-item small">
+                                    Acessar
+                                </a>
+                            @else
+                                <a type="button" class="dropdown-item small" data-bs-toggle="modal"
+                                   data-bs-target="#loginProcess">
+                                    Entrar
+                                </a>
+                            @endif
+                            <a href="{{ route('forgot.password-show') }}" class="dropdown-item small">Senha</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -54,8 +73,9 @@
 <!-- Navbar End -->
 
 @include('login.modal.modal-loginprocess')
+{{--@include('login.modal.modal-forgotpassword')--}}
 
-<!-- Hero Start -->
+<!-- Start -->
 <div class="container-fluid pt-5 bg-primary hero-header mb-5">
     <div class="container pt-5">
         <div class="row g-5 pt-5">
@@ -90,9 +110,9 @@
         </div>
     </div>
 </div>
-<!-- Hero End -->
+<!-- End -->
 
-<!-- About Start -->
+<!-- Sobre Start -->
 <div class="container-fluid py-5" id="sobreNos">
     <div class="container">
         <div class="row g-5 align-items-center">
@@ -127,9 +147,9 @@
         </div>
     </div>
 </div>
-<!-- About End -->
+<!-- Sobre End -->
 
-<!-- Service Start -->
+<!-- Castigo Start -->
 <div class="container-fluid bg-light mt-5 py-5" id="castigos">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
@@ -156,7 +176,6 @@
                                     <h5 class="mb-3">Jogue como um robô</h5>
                                     <p>Nunca perca o foco, jamais se destráia com algo e minime as distrações.
                                         Apenas continue.</p>
-                                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
                                 </div>
                             </div>
                             <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
@@ -165,9 +184,9 @@
                                         <i class="fa-solid fa-piggy-bank fa-2x"></i>
                                     </div>
                                     <h5 class="mb-3">Suborno</h5>
-                                    <p>Dê propina à um inimigo para que ele lhe ajude durante aquela partida difícil. Se livrando da derrota!
-                                        </p>
-                                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
+                                    <p>Dê propina à um inimigo para que ele lhe ajude durante aquela partida difícil. Se
+                                        livrando da derrota!
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -180,8 +199,8 @@
                                         <i class="fa fa-graduation-cap fa-2x"></i>
                                     </div>
                                     <h5 class="mb-3">Estude o adversário</h5>
-                                    <p>Descubra a fraqueza do seu adversário, onde ele é pior, onde está tendo um péssimo rendimento!</p>
-                                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
+                                    <p>Descubra a fraqueza do seu adversário, onde ele é pior, onde está tendo um
+                                        péssimo rendimento!</p>
                                 </div>
                             </div>
                             <div class="col-12 wow fadeIn" data-wow-delay="0.7s">
@@ -190,9 +209,9 @@
                                         <i class="fa fa-brain fa-2x"></i>
                                     </div>
                                     <h5 class="mb-3">Use o cérebro</h5>
-                                    <p>Analise o decorrer da partida, é hora de atacar ou se defender?! Aguarde o momento certo.
-                                        </p>
-                                    <a class="btn px-3 mt-auto mx-auto" href="">Read More</a>
+                                    <p>Analise o decorrer da partida, é hora de atacar ou se defender?! Aguarde o
+                                        momento certo.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -202,9 +221,9 @@
         </div>
     </div>
 </div>
-<!-- Service End -->
+<!-- Castigo End -->
 
-<!-- Feature Start -->
+<!-- Partidas Start -->
 <div class="container-fluid bg-primary feature pt-5" id="partidas">
     <div class="container pt-5">
         <div class="row g-5">
@@ -242,7 +261,7 @@
                         <div class="d-flex rounded p-3" style="background: rgba(256, 256, 256, 0.1);">
                             <i class="fa fa-users fa-3x text-white"></i>
                             <div class="ms-3">
-                                <h2 class="text-white mb-0" data-toggle="counter-up">{{ $users }}</h2>
+                                <h2 class="text-white mb-0" data-toggle="counter-up">{{ $users->count() }}</h2>
                                 <p class="text-white mb-0">Total de jogadores</p>
                             </div>
                         </div>
@@ -264,9 +283,9 @@
         </div>
     </div>
 </div>
-<!-- Feature End -->
+<!-- Partidas End -->
 
-<!-- FAQs Start -->
+<!-- Perguntas Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -402,97 +421,111 @@
         </div>
     </div>
 </div>
-<!-- FAQs Start -->
+<!-- Perguntas Start -->
 
-
-<!-- Team Start -->
+<!-- Time Start -->
 <div class="container-fluid bg-light py-5" id="jogadores">
     <div class="container py-5">
         <div class="row g-5 align-items-center">
             <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
                 <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Nosso Time</div>
                 <h1 class="mb-4">Conheça nossos experientes jogadores</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                    amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
-                    clita duo justo et tempor eirmod magna dolore erat amet</p>
-                <a class="btn btn-primary rounded-pill px-4" href="">Read More</a>
+                <p class="mb-4">O mais correto toma a caixa do gardenal, o mais forte está só
+                    a capa do batman, o mais inteligênte não terminou o ensino fundamental, porém, o ponto positivo para
+                    essa cambada de fela da pota é que nenhum deles vota no PT!
+                </p>
             </div>
             <div class="col-lg-7">
                 <div class="row g-4">
                     <div class="col-md-6">
                         <div class="row g-4">
-                            <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="team-item bg-white text-center rounded p-4 pt-0">
-                                    <img class="img-fluid rounded-circle p-4" src="img/team-1.jpg" alt="">
-                                    <h5 class="mb-0">Boris Johnson</h5>
-                                    <small>Founder & CEO</small>
-                                    <div class="d-flex justify-content-center mt-3">
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-instagram"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-linkedin-in"></i></a>
+                            @if($marcielUser)
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4"
+                                             src="storage/{{ $marcielUser->image }}" alt="{{ $marcielUser->nickname }}"
+                                             style="width: 350px; height: 300px">
+                                        <h5 class="mb-0">{{ $marcielUser->name }}</h5>
+                                        <small>Derrotas: {{ $marcielDefeats }}</small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-instagram"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="team-item bg-white text-center rounded p-4 pt-0">
-                                    <img class="img-fluid rounded-circle p-4" src="img/team-2.jpg" alt="">
-                                    <h5 class="mb-0">Adam Crew</h5>
-                                    <small>Executive Manager</small>
-                                    <div class="d-flex justify-content-center mt-3">
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-instagram"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-linkedin-in"></i></a>
+                            @endif
+                            @if($jeanUser)
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4" src="storage/{{ $jeanUser->image }}"
+                                             alt="{{ $jeanUser->nickname }}" style="width: 350px; height: 300px">
+                                        <h5 class="mb-0">{{ $jeanUser->name}}</h5>
+                                        <small>Derrotas: {{ $jeanDefeats }}</small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-instagram"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
+                            @if($hugoUser)
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4" src="storage/{{ $hugoUser->image }}"
+                                             alt="{{ $hugoUser->nickname }}" style="width: 350px; height: 300px">
+                                        <h5 class="mb-0">{{ $hugoUser->name}}</h5>
+                                        <small>Derrotas: {{ $hugoDefeats }}</small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                     <div class="col-md-6 pt-md-4">
                         <div class="row g-4">
-                            <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="team-item bg-white text-center rounded p-4 pt-0">
-                                    <img class="img-fluid rounded-circle p-4" src="img/team-3.jpg" alt="">
-                                    <h5 class="mb-0">Kate Winslet</h5>
-                                    <small>Co Founder</small>
-                                    <div class="d-flex justify-content-center mt-3">
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-instagram"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-linkedin-in"></i></a>
+                            @if($brunoUser)
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4" src="storage/{{ $brunoUser->image }}"
+                                             alt="{{ $brunoUser->nickname }}" style="width: 350px; height: 300px">
+                                        <h5 class="mb-0">{{ $brunoUser->name }}</h5>
+                                        <small>Derrotas: {{ $brunoDefeats }} </small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a class="btn btn-square btn-primary m-1" href="#"><i
+                                                    class="fab fa-instagram"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 wow fadeIn" data-wow-delay="0.7s">
-                                <div class="team-item bg-white text-center rounded p-4 pt-0">
-                                    <img class="img-fluid rounded-circle p-4" src="img/team-4.jpg" alt="">
-                                    <h5 class="mb-0">Cody Gardner</h5>
-                                    <small>Project Manager</small>
-                                    <div class="d-flex justify-content-center mt-3">
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-facebook-f"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-twitter"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-instagram"></i></a>
-                                        <a class="btn btn-square btn-primary m-1" href=""><i
-                                                class="fab fa-linkedin-in"></i></a>
+                            @endif
+                            @if($miguelUser)
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.7s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4" src="storage/{{ $miguelUser->image }}"
+                                             alt="{{ $miguelUser->nickname }}" style="width: 350px; height: 300px">
+                                        <h5 class="mb-0">{{ $miguelUser->name }}</h5>
+                                        <small>Derrotas: {{ $miguelDefeats }}</small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href=""><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a class="btn btn-square btn-primary m-1" href=""><i
+                                                    class="fab fa-instagram"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -500,7 +533,7 @@
         </div>
     </div>
 </div>
-<!-- Team End -->
+<!-- Time End -->
 
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5">
@@ -515,7 +548,7 @@
                     Switch, além de ser o primeiro jogo Mario para o console.</p>
             </div>
             <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-                <h5 class="text-white mb-4">Link Popular</h5>
+                <h5 class="text-white mb-4">Menu</h5>
                 <a class="btn btn-link" href="{{ route('web.index') }}">Home</a>
                 <a class="btn btn-link" href="#sobreNos">Sobre</a>
                 <a class="btn btn-link" href="#castigos">Castigo</a>
@@ -524,7 +557,8 @@
                 <a class="btn btn-link" href="">Entrar</a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <img class="img-fluid" src="{{ asset('web/img/char_mario.png') }}" style="width: 300px" alt="char_mario">
+                <img class="img-fluid" src="{{ asset('web/img/char_mario.png') }}" style="width: 300px"
+                     alt="char_mario">
             </div>
         </div>
     </div>
@@ -533,6 +567,17 @@
 
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa-solid fa-arrow-up"></i></a>
+
+<script src="{{ asset('js/all.min.js') }}"></script>
+<script src="{{ asset('js/web/js/jquery-3.6.1.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/web/lib/wow/wow.min.js') }}"></script>
+<script src="{{ asset('js/web/lib/easing/easing.min.js') }}"></script>
+<script src="{{ asset('js/web/lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ asset('js/web/lib/counterup/counterup.min.js') }}"></script>
+<script src="{{ asset('js/web/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/web/js/main.js') }}"></script>
+
 </body>
 
 </html>

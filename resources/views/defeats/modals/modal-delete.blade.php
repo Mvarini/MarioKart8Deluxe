@@ -35,7 +35,7 @@
                     <form action="{{ route('defeat.destroy', ['defeat' => $defeat->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Sim, excluir!</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Sim, excluir</button>
                     </form>
                 </div>
             </div>

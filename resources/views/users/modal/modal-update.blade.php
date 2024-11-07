@@ -18,7 +18,8 @@
 
                             <div class="col-md-7">
                                 <label for="name" class="form-label">Nome</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}"
+                                <input type="text" name="name" id="name" class="form-control"
+                                       value="{{ old('name', $user->name) }}"
                                        placeholder="Nome" required>
                             </div>
 
@@ -30,18 +31,19 @@
 
                             <div class="col-md-8">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input type="text" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}"
+                                <input type="text" name="email" id="email" class="form-control"
+                                       value="{{ old('email', $user->email) }}"
                                        placeholder="E-mail" required>
                             </div>
 
                             <div class="col-md-4">
                                 <label for="birthday" class="form-label">Aniversário</label>
-                                <input type="text" name="birthday" id="birthday" class="form-control date"
-                                       value="{{ old('birthday', \Carbon\Carbon::parse($user->birthday)->format('d/m/Y')) }}" placeholder="Aniversário" required>
+                                <input type="text" name="birthday" id="birthday" class="form-control date" value="{{ old('birthday', \Carbon\Carbon::parse($user->birthday)->format('d/m/Y')) }}" placeholder="Aniversário" required>
                             </div>
                             <div class="col-12">
                                 <label for="image" class="form-label">Imagem</label>
-                                <input type="file" name="image" id="image" class="form-control" value="{{ old('image', $user->image) }}"
+                                <input type="file" name="image" id="image" class="form-control"
+                                       value="{{ old('image', $user->image) }}"
                                        placeholder="Imagem">
                             </div>
 
