@@ -13,42 +13,65 @@
                     <span class="align-middle">Listar</span>
                 </div>
                 <div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ações
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
-                                   data-bs-target="#permissionCreate">Adicionar</a></li>
-                        </ul>
-                    </div>
+                    @can('store-permission')
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Ações
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#permissionCreate">Adicionar</a></li>
+                            </ul>
+                        </div>
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
                 <x-alert/>
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th class="d-none d-md-table-cell">Rota</th>
+                    <tr>
+                        <th>Nome</th>
+                        @if(auth()->user()->can('update-permission') || auth()->user()->can('destroy-permission'))
+                        <th class="d-none d-md-table-cell">Rota</th>
+                        @else
+                            <th>Rota</th>
+                        @endif
+                        @if(auth()->user()->can('update-permission') || auth()->user()->can('destroy-permission'))
                             <th>Ações</th>
-                        </tr>
+                        @endif
+                    </tr>
                     </thead>
                     <tbody>
                     @forelse($permissions as $permission)
                         <tr>
                             <td class="align-middle">{{ $permission->title }}</td>
                             <td class="d-none d-md-table-cell align-middle">{{ $permission->name }}</td>
+
+                            @if(auth()->user()->can('update-permission') || auth()->user()->can('destroy-permission'))
                             <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#permissionUpdate{{ $permission->id }}" href="#">Editar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#permissionDelete{{ $permission->id }}" href="#">Excluir</a></li>
-                                    </ul>
-                                </div>
+
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark border-0" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @can('update-permission')
+                                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                       data-bs-target="#permissionUpdate{{ $permission->id }}"
+                                                       href="#">Editar</a></li>
+                                            @endcan
+
+                                            @can('destroy-permission')
+                                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                       data-bs-target="#permissionDelete{{ $permission->id }}"
+                                                       href="#">Excluir</a></li>
+                                            @endcan
+                                        </ul>
+                                    </div>
+                                @endif
                             </td>
                         </tr>
                     @empty

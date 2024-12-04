@@ -15,17 +15,26 @@
                     <span class="align-middle">Listar</span>
                 </div>
                 <div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ações
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a data-bs-toggle="modal" data-bs-target="#userImportExcel" class="dropdown-item btn btn-dark">Importar
-                                    Excel</a></li>
-                            <li><a data-bs-toggle="modal" data-bs-target="#userCreateForm"
-                                   class="dropdown-item btn btn-primary">Adicionar</a></li>
-                        </ul>
-                    </div>
+                    @if(auth()->user()->can('user-import') || auth()->user()->can('store-user'))
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Ações
+                            </button>
+                            <ul class="dropdown-menu">
+                                @can('user-import')
+                                    <li><a data-bs-toggle="modal" data-bs-target="#userImportExcel"
+                                           class="dropdown-item btn btn-dark">Importar
+                                            Excel</a></li>
+                                @endcan
+
+                                @can('store-user')
+                                    <li><a data-bs-toggle="modal" data-bs-target="#userCreateForm"
+                                           class="dropdown-item btn btn-primary">Adicionar</a></li>
+                                @endcan
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="card-body shadow-sm">
@@ -59,16 +68,27 @@
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" data-bs-toggle="modal"
-                                               data-bs-target="#userUpdatePasswordForm{{ $user->id }}"
-                                               href="#">Senha</a></li>
+                                        @can('update-password-user')
+                                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                   data-bs-target="#userUpdatePasswordForm{{ $user->id }}"
+                                                   href="#">Senha</a></li>
+                                        @endcan
+
                                         <li><a class="dropdown-item" data-bs-toggle="modal"
                                                data-bs-target="#userShowForm{{ $user->id }}" href="#">Visualizar</a>
                                         </li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal"
-                                               data-bs-target="#userUpdateForm{{ $user->id }}" href="#">Editar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal"
-                                               data-bs-target="#userDeleteForm{{ $user->id }}" href="#">Excluir</a></li>
+
+                                        @can('update-user')
+                                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                   data-bs-target="#userUpdateForm{{ $user->id }}" href="#">Editar</a>
+                                            </li>
+                                        @endcan
+
+                                        @can('destroy-user')
+                                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                   data-bs-target="#userDeleteForm{{ $user->id }}" href="#">Excluir</a>
+                                            </li>
+                                        @endcan
                                     </ul>
                                 </div>
                             </td>

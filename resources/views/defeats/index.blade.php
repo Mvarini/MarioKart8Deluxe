@@ -15,16 +15,25 @@
                 </div>
                 <div>
                     <div class="dropdown">
-                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                             Ações
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item btn btn-dark" data-bs-toggle="modal"
-                                   data-bs-target="#formImportCSV">Importar CSV</a></li>
-                            <li><a class="dropdown-item btn btn-warning" data-bs-toggle="modal"
-                                   data-bs-target="#formSearchDefeat">Pesquisar</a></li>
-                            <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
-                                   data-bs-target="#formCreate">Adicionar</a></li>
+                            @can('defeat-import')
+                                <li><a class="dropdown-item btn btn-dark" data-bs-toggle="modal"
+                                       data-bs-target="#formImportCSV">Importar CSV</a></li>
+                            @endcan
+
+                            @can('index-defeat')
+                                <li><a class="dropdown-item btn btn-warning" data-bs-toggle="modal"
+                                       data-bs-target="#formSearchDefeat">Pesquisar</a></li>
+                            @endcan
+
+                            @can('store-defeat')
+                                <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#formCreate">Adicionar</a></li>
+                            @endcan
                         </ul>
                     </div>
                 </div>
@@ -52,13 +61,27 @@
                             <td class="align-middle"> {{ \Carbon\Carbon::parse($defeat->date_at)->format('d/m/Y') }}</td>
                             <td class="d-md-flex flex-row justify-content-center">
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-outline-dark border-0" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formShow{{ $defeat->id }}" href="#">Visualizar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formUpdate{{ $defeat->id }}" href="#">Editar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#formDelete{{ $defeat->id }}" href="#">Excluir</a></li>
+                                        @can('show-defeat')
+                                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                   data-bs-target="#formShow{{ $defeat->id }}" href="#">Visualizar</a>
+                                            </li>
+                                        @endcan
+
+                                        @can('update-defeat')
+                                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                   data-bs-target="#formUpdate{{ $defeat->id }}" href="#">Editar</a>
+                                            </li>
+                                        @endcan
+
+                                            @can('destroy-defeat')
+                                        <li><a class="dropdown-item" data-bs-toggle="modal"
+                                               data-bs-target="#formDelete{{ $defeat->id }}" href="#">Excluir</a></li>
+                                            @endcan
                                     </ul>
                                 </div>
                             </td>

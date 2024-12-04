@@ -6,9 +6,9 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link href="{{ asset('css/booststrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/sbadmin.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/booststrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/sbadmin.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet"/>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -36,7 +36,8 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                    aria-expanded="false">
                     @if(Auth::user()->image)
-                        <img class="rounded-5 me-2" src="/storage/{{ Auth::user()->image }}" alt="{{ Auth::user()->nickname }}" style="width: 35px; height: 35px"/>
+                        <img class="rounded-5 me-2" src="/storage/{{ Auth::user()->image }}"
+                             alt="{{ Auth::user()->nickname }}" style="width: 35px; height: 35px"/>
                     @else
                         <i class="fas fa-user fa-fw me-2"></i>
                     @endif
@@ -44,8 +45,10 @@
                 </a>
             @endif
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdateForm" href="">Perfil</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdatePassword" href="">Senha</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdateForm"
+                       href="">Perfil</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdatePassword" href="">Senha</a>
+                </li>
                 <li><a class="dropdown-item" href="{{ route('login.destroy') }}">Sair</a></li>
             </ul>
         </li>
@@ -57,26 +60,40 @@
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                 <div class="nav">
-                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'dashboardActiveMenu']) href="{{ route('dashboard.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
-                        Dashboard
-                    </a>
-                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'userActiveMenu']) href="{{ route('user.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                        Usuários
-                    </a>
-                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'defeatActiveMenu']) href="{{ route('defeat.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-skull"></i></div>
-                        Derrotas
-                    </a>
-                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'roleActiveMenu']) href="{{ route('role.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
-                        Papéis
-                    </a>
-                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'permissionActiveMenu']) href="{{ route('permission.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
-                        Permissões
-                    </a>
+                    @can('index-dashboard')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'dashboardActiveMenu']) href="{{ route('dashboard.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                            Dashboard
+                        </a>
+                    @endcan
+
+                    @can('index-user')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'userActiveMenu']) href="{{ route('user.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            Usuários
+                        </a>
+                    @endcan
+
+                    @can('index-defeat')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'defeatActiveMenu']) href="{{ route('defeat.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-skull"></i></div>
+                            Derrotas
+                        </a>
+                    @endcan
+
+                    @can('index-role')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'roleActiveMenu']) href="{{ route('role.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
+                            Papéis
+                        </a>
+                    @endcan
+
+                    @can('index-permission')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'permissionActiveMenu']) href="{{ route('permission.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
+                            Permissões
+                        </a>
+                    @endcan
                 </div>
             </div>
         </nav>

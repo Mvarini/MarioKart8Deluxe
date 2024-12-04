@@ -14,17 +14,22 @@
                     <span class="align-middle">Listar</span>
                 </div>
                 <div>
-                    <div class="dropdown">
-                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ações
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item btn btn-warning" data-bs-toggle="modal"
-                                   data-bs-target="#formSearchDefeat">Pesquisar</a></li>
-                            <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
-                                   data-bs-target="#roleCreate">Adicionar</a></li>
-                        </ul>
-                    </div>
+                    @if(auth()->user()->can('store-role'))
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Ações
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                {{--                            <li><a class="dropdown-item btn btn-warning" data-bs-toggle="modal"--}}
+                                {{--                                   data-bs-target="#formSearchDefeat">Pesquisar</a></li>--}}
+                                <li><a class="dropdown-item btn btn-primary" data-bs-toggle="modal"
+                                       data-bs-target="#roleCreate">Adicionar</a></li>
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -35,25 +40,44 @@
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th class="text-center" style="width: 20px">Ações</th>
+                        @if(auth()->user()->can('update-role') || auth()->user()->can('destroy-role') || auth()->user()->can('index-permission') )
+                            <th class="text-center" style="width: 20px">Ações</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
                     @forelse($roles as $role)
                         <tr>
                             <td class="align-middle">{{ $role->name }}</td>
-                            <td class="d-md-flex flex-row justify-content-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#roleUpdate{{ $role->id }}" href="#">Editar</a></li>
-                                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#roleDelete{{ $role->id }}" href="#">Excluir</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('role-permission.index', ['role' => $role->id]) }}">Permissões</a></li>
-                                    </ul>
-                                </div>
-                            </td>
+                            @if(auth()->user()->can('update-role') || auth()->user()->can('destroy-role') || auth()->user()->can('index-permission') )
+                                <td class="d-md-flex flex-row justify-content-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark border-0" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @can('update-role')
+                                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                       data-bs-target="#roleUpdate{{ $role->id }}" href="#">Editar</a>
+                                                </li>
+                                            @endcan
+
+                                            @can('destroy-role')
+                                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                       data-bs-target="#roleDelete{{ $role->id }}" href="#">Excluir</a>
+                                                </li>
+                                            @endcan
+
+                                            @can('index-permission')
+                                                <li><a class="dropdown-item"
+                                                       href="{{ route('role-permission.index', ['role' => $role->id]) }}">Permissões</a>
+                                                </li>
+                                            @endcan
+                                        </ul>
+                                    </div>
+                                </td>
+                            @endif
                         </tr>
                     @empty
                         <div class="alert alert-warning" role="alert">
