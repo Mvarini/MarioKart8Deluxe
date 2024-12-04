@@ -8,10 +8,13 @@ use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+
+use Spatie\Permission\Models\Role;
 
 use function Laravel\Prompts\select;
 
@@ -19,10 +22,15 @@ class UserController extends Controller
 {
     public function index()
     {
-
         $users = User::orderBy('name', 'asc')->paginate(10);
 
-        return view('users.index', ['users' => $users, 'menu' => 'userActiveMenu']);
+        //Recuperar todos os papéis
+        $roles = Role::pluck('name')->all();
+
+        // Recupera o primeiro papel já atribuído ao usuário
+        // $user->roles->pluck('name')->first();
+
+        return view('users.index', ['users' => $users, 'menu' => 'userActiveMenu', 'roles' => $roles]);
     }
 
     public function store(UserRequest $request)
@@ -46,6 +54,9 @@ class UserController extends Controller
                 'password' => $request->password,
                 'image' => $request->hasFile('image') ? $requestImage : $request->image,
             ]);
+
+            // Cadastrar o papel do usuário
+            $user->assignRole($request->role);
 
             DB::commit();
 
@@ -87,6 +98,9 @@ class UserController extends Controller
                 'image' => $request->hasFile('image') ? $requestImage : $user->image,
             ]);
 
+            //Editar o papel do usuário
+            $user->syncRoles($request->role);
+
             DB::commit();
 
             Log::info('Usuário atualizado', ['user_id' => $user->id]);
@@ -108,13 +122,16 @@ class UserController extends Controller
 
             $user->delete();
 
+            // Remove todos os papéis atribuídos ao usuário
+            $user->syncRoles([]);
+
             if ($user->image) {
                 Storage::disk('public')->delete($user->image);
             }
 
             DB::commit();
 
-            Log::info('Usuário excluído', ['user_id' => $user->id]);
+            Log::info('Usuário excluído', ['user_id' => $user->id, 'action_user_id' => Auth::id()]);
 
             return redirect()->route('user.index')->with('success', 'Usuário excluído com sucesso!');
         } catch (Exception $ex) {

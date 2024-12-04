@@ -33,6 +33,16 @@
                                             <dt class="col-4">E-mail:</dt>
                                             <dd class="col-8">{{ $user->email }}</dd>
 
+                                            <dt class="col-4">Papel:</dt>
+{{--                                            <dd class="col-8">{{ $user->roles->pluck('name')->first() }}</dd>--}}
+                                            <dd class="col-8">
+                                                @forelse($user->getRoleNames() as $role)
+                                                    {{ $role }}
+                                                @empty
+                                                    {{ "-" }}
+                                                @endforelse
+                                            </dd>
+
                                             <dt class="col-4">Niver:</dt>
                                             <dd class="col-8">{{ \Carbon\Carbon::parse($user->birthday)->format('d/m/Y') }}</dd>
 

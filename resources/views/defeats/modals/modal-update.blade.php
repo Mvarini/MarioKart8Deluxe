@@ -28,19 +28,22 @@
                                 <label for="harmed" class="form-label">Prejudicou</label>
                                 <select name="harmed" id="harmed" class="form-select" required>
                                     <option value="">Selecione o fela da pota</option>
-                                    @php
-                                        $harmed = $defeat->harmed;
-                                        $select = function ($value) use ($harmed){
-                                            return ($harmed == $value ? "selected" : "");
-                                        }
-                                    @endphp
+{{--                                    @php--}}
+{{--                                        $harmed = $defeat->harmed;--}}
+{{--                                        $select = function ($value) use ($harmed){--}}
+{{--                                            return ($harmed == $value ? "selected" : "");--}}
+{{--                                        }--}}
+{{--                                    @endphp--}}
 
-                                    <option {{ $select('Roleta') }} value="Roleta">Roleta</option>
-                                    <option {{ $select('Bruno') }} value="Bruno">Bruno</option>
-                                    <option {{ $select('Hugo') }} value="Hugo">Hugo</option>
-                                    <option {{ $select('Jean') }} value="Jean">Jean</option>
-                                    <option {{ $select('Marciel') }} value="Marciel">Marciel</option>
-                                    <option {{ $select('Miguel') }} value="Miguel">Miguel</option>
+{{--                                    <option {{ $select('Roleta') }} value="Roleta">Roleta</option>--}}
+{{--                                    <option {{ $select('Bruno') }} value="Bruno">Bruno</option>--}}
+{{--                                    <option {{ $select('Hugo') }} value="Hugo">Hugo</option>--}}
+{{--                                    <option {{ $select('Jean') }} value="Jean">Jean</option>--}}
+{{--                                    <option {{ $select('Marciel') }} value="Marciel">Marciel</option>--}}
+{{--                                    <option {{ $select('Miguel') }} value="Miguel">Miguel</option>--}}
+                                    @foreach($harmeds as $harmed)
+                                        <option {{ old('harmed', $harmed) == $defeat->harmed ? "selected" : "" }} value="{{ $harmed }}">{{ $harmed }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -49,16 +52,19 @@
                                 <select name="pain" id="pain" class="form-select" required>
                                     <option value="">Selecione o castigo</option>
 
-                                    @php
-                                        $pain = $defeat->pain;
-                                        $select = function ($value) use ($pain){
-                                            return ($pain == $value ? "selected" : "");
-                                        }
-                                    @endphp
+{{--                                    @php--}}
+{{--                                        $pain = $defeat->pain;--}}
+{{--                                        $select = function ($value) use ($pain){--}}
+{{--                                            return ($pain == $value ? "selected" : "");--}}
+{{--                                        }--}}
+{{--                                    @endphp--}}
 
-                                    <option {{ $select('Fazer café') }} value="Fazer café">Fazer café</option>
-                                    <option {{ $select('Buscar café') }} value="Buscar café">Buscar café</option>
-                                    <option {{ $select('Lavar louça') }} value="Lavar louça">Lavar louça</option>
+{{--                                    <option {{ $select('Fazer café') }} value="Fazer café">Fazer café</option>--}}
+{{--                                    <option {{ $select('Buscar café') }} value="Buscar café">Buscar café</option>--}}
+{{--                                    <option {{ $select('Lavar louça') }} value="Lavar louça">Lavar louça</option>--}}
+                                    @foreach($pains as $pain)
+                                        <option {{ old('pain', $pain) == $defeat->pain ? "selected" : "" }} value="{{ $pain }}">{{ $pain }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

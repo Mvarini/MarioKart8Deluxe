@@ -30,6 +30,7 @@ class UserRequest extends FormRequest
             'birthday' => 'required|max:10',
             'password' => 'required_if:password,!=,null|min:6|confirmed',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'role' => 'required'
         ];
     }
 
@@ -65,6 +66,7 @@ class UserRequest extends FormRequest
                 'mimes' => 'O campo imagem só aceita arquivos do tipo: jpeg, png, jpg e gif',
                 'max' => 'A imagem não pode ser superior a 2MB'
             ],
+            'role' => 'O papel é obrigatório.'
         ];
     }
 }

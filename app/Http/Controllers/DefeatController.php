@@ -28,8 +28,23 @@ class DefeatController extends Controller
             ->paginate(10)
             ->withQueryString();
 
+        $harmeds = [
+            'Roleta',
+            'Bruno',
+            'Hugo',
+            'Jean',
+            'Marciel',
+            'Miguel'
+        ];
 
-        return view('defeats.index', ['defeats' => $defeats, 'users' => $users, 'menu' => 'defeatActiveMenu']);
+        $pains = [
+            'Fazer café',
+            'Buscar café',
+            'Lavar louça'
+        ];
+
+
+        return view('defeats.index', ['defeats' => $defeats, 'users' => $users, 'menu' => 'defeatActiveMenu', 'harmeds' => $harmeds, 'pains' => $pains]);
     }
 
     public function create()

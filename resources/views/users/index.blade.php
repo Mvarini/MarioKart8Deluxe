@@ -36,6 +36,7 @@
                     <tr>
                         <th>Nome</th>
                         <th class="d-none d-md-table-cell">E-mail</th>
+                        <th>Papel</th>
                         <th class="w-10 text-center">Ações</th>
                     </tr>
                     </thead>
@@ -44,6 +45,13 @@
                         <tr>
                             <td class="align-middle">{{ $user->name }}</td>
                             <td class="d-none d-md-table-cell align-middle">{{ $user->email }}</td>
+                            <td class="align-middle">
+                                @forelse($user->getRoleNames() as $role)
+                                    {{ $role }}
+                                @empty
+                                    {{ "N/A "}}
+                                @endforelse
+                            </td>
                             <td class="text-center">
                                 <div class="dropdown">
                                     <button class="btn btn-outline-dark border-0" type="button"

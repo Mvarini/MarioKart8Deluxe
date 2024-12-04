@@ -27,12 +27,15 @@
                         <label for="harmed" class="form-label">Algoz</label>
                         <select name="harmed" id="harmed" class="form-select" required>
                             <option value="">Selecione o fela da pota</option>
-                            <option {{ old('harmed') == "Roleta" ? "selected" : "" }} value="Roleta">Roleta</option>
-                            <option {{ old('harmed') == "Bruno" ? "selected" : "" }} value="Bruno">Bruno</option>
-                            <option {{ old('harmed') == "Hugo" ? "selected" : "" }} value="Hugo">Hugo</option>
-                            <option {{ old('harmed') == "Jean" ? "selected" : "" }} value="Jean">Jean</option>
-                            <option {{ old('harmed') == "Marciel" ? "selected" : "" }}value="Marciel">Marciel</option>
-                            <option {{ old('harmed') == "Miguel" ? "selected" : "" }} value="Miguel">Miguel</option>
+{{--                            <option {{ old('harmed') == "Roleta" ? "selected" : "" }} value="Roleta">Roleta</option>--}}
+{{--                            <option {{ old('harmed') == "Bruno" ? "selected" : "" }} value="Bruno">Bruno</option>--}}
+{{--                            <option {{ old('harmed') == "Hugo" ? "selected" : "" }} value="Hugo">Hugo</option>--}}
+{{--                            <option {{ old('harmed') == "Jean" ? "selected" : "" }} value="Jean">Jean</option>--}}
+{{--                            <option {{ old('harmed') == "Marciel" ? "selected" : "" }}value="Marciel">Marciel</option>--}}
+{{--                            <option {{ old('harmed') == "Miguel" ? "selected" : "" }} value="Miguel">Miguel</option>--}}
+                            @foreach($harmeds as $harmed)
+                                <option {{ old('harmed') == $harmed ? "selected" : ""  }} value="{{ $harmed }}">{{ $harmed }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -40,9 +43,12 @@
                         <label for="pain" class="form-label">Castigo</label>
                         <select name="pain" id="pain" class="form-select" required>
                             <option value="">Selecione o castigo</option>
-                            <option {{ old('pain') == "Fazer café" ? "selected" : "" }} value="Fazer café">Fazer café</option>
-                            <option {{ old('pain') == "Buscar café" ? "selected" : "" }} value="Buscar café">Buscar café</option>
-                            <option {{ old('pain') == "Lavar louça" ? "selected" : "" }} value="Lavar louça">Lavar louça</option>
+{{--                            <option {{ old('pain') == "Fazer café" ? "selected" : "" }} value="Fazer café">Fazer café</option>--}}
+{{--                            <option {{ old('pain') == "Buscar café" ? "selected" : "" }} value="Buscar café">Buscar café</option>--}}
+{{--                            <option {{ old('pain') == "Lavar louça" ? "selected" : "" }} value="Lavar louça">Lavar louça</option>--}}
+                            @foreach($pains as $pain)
+                                <option {{ old('pain') == $pain ? "selected" : "" }} value="{{ $pain }}">{{ $pain }}</option>
+                            @endforeach
                         </select>
                     </div>
 

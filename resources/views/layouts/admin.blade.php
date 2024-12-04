@@ -66,8 +66,16 @@
                         Usuários
                     </a>
                     <a @class(['nav-link', 'active' => isset($menu) && $menu == 'defeatActiveMenu']) href="{{ route('defeat.index') }}">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-crown"></i></div>
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-skull"></i></div>
                         Derrotas
+                    </a>
+                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'roleActiveMenu']) href="{{ route('role.index') }}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        Papéis
+                    </a>
+                    <a @class(['nav-link', 'active' => isset($menu) && $menu == 'permissionActiveMenu']) href="{{ route('permission.index') }}">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        Permissões
                     </a>
                 </div>
             </div>

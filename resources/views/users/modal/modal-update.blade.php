@@ -20,7 +20,7 @@
                                 <label for="name" class="form-label">Nome</label>
                                 <input type="text" name="name" id="name" class="form-control"
                                        value="{{ old('name', $user->name) }}"
-                                       placeholder="Nome" required>
+                                       placeholder="Nome completo" required>
                             </div>
 
                             <div class="col-md-5">
@@ -38,13 +38,31 @@
 
                             <div class="col-md-4">
                                 <label for="birthday" class="form-label">Aniversário</label>
-                                <input type="text" name="birthday" id="birthday" class="form-control date" value="{{ old('birthday', \Carbon\Carbon::parse($user->birthday)->format('d/m/Y')) }}" placeholder="Aniversário" required>
+                                <input type="text" name="birthday" id="birthday" class="form-control date" value="{{ old('birthday', \Carbon\Carbon::parse($user->birthday)->format('d/m/Y')) }}" placeholder="Data do aniversário" required>
                             </div>
-                            <div class="col-12">
+
+                            <div class="col-md-6">
                                 <label for="image" class="form-label">Imagem</label>
                                 <input type="file" name="image" id="image" class="form-control"
                                        value="{{ old('image', $user->image) }}"
                                        placeholder="Imagem">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="role" class="form-label">Papel</label>
+                                <select name="role" id="role" class="form-select">
+                                    <option value="">Selecione o papel</option>
+                                    @foreach($roles as $role)
+                                        @if($role != 'Administrador')
+                                           {{--$user->roles->pluck('name')->first(): pela o primeiro papel já atribuído ao usuáiro--}}
+                                            <option {{ old('role', $user->roles->pluck('name')->first()) == $role ? 'selected' : "" }}  value="{{ $role }}">{{ $role }}</option>
+                                        @else
+                                            @if(auth()->user()->hasRole('Administrador'))
+                                                <option {{ old('role', $user->roles->pluck('name')->first()) == $role ? 'selected' : "" }} value="{{ $role }}">{{ $role }}</option>
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="col-12 d-flex justify-content-end">
