@@ -1,3 +1,31 @@
+## Requisitos do projeto
+
+* PHP 8.2 ou superior
+* Composer
+* Node.js 20 ou superior
+* GIT
+
+## Como rodar o projeto baixado
+
+Duplicar o arquivo ".env.example" e renomear para ".env".<br>
+Alterar no arquivo .env o nome da base de dados para "exemplo". Exemplo: DB_DATABASE=exemplo.<br>
+Para a funcionalidade recuperar senha funcionar, necessário alterar as credenciais do servidor de envio de e-mail no arquivo .env.<br>
+
+Instalar as dependências do PHP
+```
+composer install
+```
+
+Instalar as dependências do Node.js
+```
+npm install
+```
+
+Gerar a chave
+```
+php artisan key:generate
+```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
