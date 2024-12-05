@@ -14,6 +14,14 @@
 * Node.js 20 ou superior
 * GIT
 
+## Banco de dados
+
+* Mysql
+
+## IDE
+
+* PhpStorm
+
 ## Como rodar o projeto baixado
 
 Duplicar o arquivo ".env.example" e renomear para ".env".<br>
