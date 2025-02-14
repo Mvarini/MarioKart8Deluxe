@@ -18,6 +18,7 @@ class WebController extends Controller
         $jeanUser = User::where('nickname', 'Jean')->first();
         $miguelUser = User::where('nickname', 'Miguel')->first();
         $hugoUser = User::where('nickname', 'Hugo')->first();
+        $hilarioUser = User::where('nickname', 'Vem Diesel')->first();
 
         if ($marcielUser) {
             $marcielDefeats = Defeat::with('users')->where('user_id', '=', $marcielUser->id)->count();
@@ -49,6 +50,12 @@ class WebController extends Controller
             $hugoDefeats = 0;
         }
 
+        if ($hilarioUser) {
+            $hilarioDefeats = Defeat::with('users')->where('user_id', '=', $hilarioUser->id)->count();
+        }else{
+            $hilarioDefeats = 0;
+        }
+
 
         return view('web.admin',[
             'users'=>$users,
@@ -58,11 +65,13 @@ class WebController extends Controller
             'jeanUser'=>$jeanUser,
             'miguelUser'=>$miguelUser,
             'hugoUser'=>$hugoUser,
+            'hilarioUser'=>$hilarioUser,
             'marcielDefeats'=>$marcielDefeats,
             'brunoDefeats'=>$brunoDefeats,
             'miguelDefeats'=>$miguelDefeats,
             'jeanDefeats'=>$jeanDefeats,
             'hugoDefeats'=>$hugoDefeats,
+            'hilarioDefeats'=>$hilarioDefeats,
         ] );
     }
 }

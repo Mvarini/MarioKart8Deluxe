@@ -526,6 +526,23 @@
                                     </div>
                                 </div>
                             @endif
+                            @if($hilarioUser)
+                                <div class="col-12 wow fadeIn" data-wow-delay="0.7s">
+                                    <div class="team-item bg-white text-center rounded p-4 pt-0">
+                                        <img class="img-fluid rounded-circle p-4"
+                                             src="storage/{{ $hilarioUser->image }}"
+                                             alt="{{ $hilarioUser->nickname }}" style="width: 350px; height: 300px">
+                                        <h5 class="mb-0">{{ $hilarioUser->name }}</h5>
+                                        <small>Derrotas: {{ $hilarioDefeats }}</small>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <a class="btn btn-square btn-primary m-1" href=""><i
+                                                    class="fab fa-facebook-f"></i></a>
+                                            <a class="btn btn-square btn-primary m-1" href=""><i
+                                                    class="fab fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
