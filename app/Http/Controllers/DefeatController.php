@@ -34,13 +34,17 @@ class DefeatController extends Controller
             'Hugo',
             'Jean',
             'Marciel',
-            'Miguel'
+            'Miguel',
+            'Hilario'
         ];
 
         $pains = [
             'Fazer café',
             'Buscar café',
-            'Lavar louça'
+            'Lavar louça',
+            'Garçom',
+            'Sorvete',
+            'Bebida duvidosa'
         ];
 
 
