@@ -40,8 +40,8 @@ class DashboardController extends Controller
 
         // formatar para chartjs
         $defeatLabel = " 'Total de partidas' ";
-        $defeatAno = implode(",", $ano);
-        $defeatTotal = implode(",", $total);
+        $defeatAno = !empty($ano) ? implode(",", $ano) : "''";
+        $defeatTotal = !empty($total) ? implode(",", $total) : "0";
 
         //-------------------------------------------------//
 

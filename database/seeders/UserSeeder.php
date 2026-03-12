@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'marciel_mav@hotmail.com',
             'password' => Hash::make('123456b', ['rounds' => 12]),
         ]);
-        $admin->assignRole('admin');
+        $admin->assignRole('Administrador');
 
         $bruno = User::firstOrCreate([
             'name' => 'Bruno Prado',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'email' => 'bruno@email.com',
             'password' => Hash::make('123456b', ['rounds' => 12]),
         ]);
-        $bruno->assignRole('user');
+        $bruno->assignRole('Usuário');
 
         $jean = User::firstOrCreate([
             'name' => 'Jean Alves',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'email' => 'jean@email.com',
             'password' => Hash::make('123456b', ['rounds' => 12]),
         ]);
-        $jean->assignRole('user');
+        $jean->assignRole('Usuário');
 
         $miguel = User::firstOrCreate([
             'name' => 'Miguel',
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
             'email' => 'Miguel@email.com',
             'password' => Hash::make('123456b', ['rounds' => 12]),
         ]);
-        $miguel->assignRole('user');
+        $miguel->assignRole('Usuário');
 
        $hugo = User::firstOrCreate([
             'name' => 'Hugo Varini',
@@ -57,6 +57,6 @@ class UserSeeder extends Seeder
             'email' => 'hugo@email.com',
             'password' => Hash::make('123456b', ['rounds' => 12]),
         ]);
-       $hugo->assignRole('user');
+       $hugo->assignRole('Usuário');
     }
 }
