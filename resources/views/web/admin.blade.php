@@ -46,6 +46,7 @@
                     <a href="#castigos" class="nav-item nav-link">Castigo</a>
                     <a href="#partidas" class="nav-item nav-link">Partidas</a>
                     <a href="#jogadores" class="nav-item nav-link">Jogadores</a>
+                    <a href="#jogadores" class="nav-item nav-link">Teste</a>
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Restrito</a>
