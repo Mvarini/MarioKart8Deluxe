@@ -45,10 +45,16 @@
                 </a>
             @endif
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdateForm"
-                       href="">Perfil</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdatePassword" href="">Senha</a>
-                </li>
+                @can('update-profile')
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdateForm"
+                           href="">Perfil</a></li>
+                @endcan
+
+                @can('update-password')
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdatePassword" href="">Senha</a>
+                    </li>
+                @endcan
+
                 <li><a class="dropdown-item" href="{{ route('login.destroy') }}">Sair</a></li>
             </ul>
         </li>
