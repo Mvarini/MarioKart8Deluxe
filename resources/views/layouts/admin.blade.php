@@ -45,7 +45,7 @@
                 </a>
             @endif
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                @can('update-user')
+                @can('update-password-user')
                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#profileUpdateForm"
                            href="">Perfil</a></li>
                 @endcan
