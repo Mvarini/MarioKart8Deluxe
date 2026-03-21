@@ -1,4 +1,4 @@
-name: Deploy Laravel to VPS MarioKart8
+name: Deploy Laravel to VPS MarioKart
 
 on:
   push:
