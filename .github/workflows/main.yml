@@ -20,8 +20,9 @@ jobs:
           script: |
             cd /var/www/mariokart.marcielvarini.com.br
 
-            git fetch origin main
-            git reset --hard origin/main
+            git pull origin main
+            # git fetch origin main
+            # git reset --hard origin/main
             composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
             php artisan migrate --force
             php artisan optimize
