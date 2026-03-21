@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             'name' => 'Miguel',
             'nickname' => 'Miguel',
             'birthday' => '1988-04-28',
-            'email' => 'Miguel@email.com',
+            'email' => 'miguel@email.com',
             'password' => Hash::make('123456b', ['rounds' => 12]),
         ]);
         $miguel->assignRole('Usuário');
