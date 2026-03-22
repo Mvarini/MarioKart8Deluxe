@@ -19,8 +19,9 @@ jobs:
           port: 22
           script: |
             cd /var/www/mariokart.marcielvarini.com.br
-
-            git pull origin main
+            
+            git fetch --all
+            git reset --hard origin/main
             
             composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
             
