@@ -19,11 +19,22 @@ jobs:
           port: 22
           script: |
             cd /var/www/mariokart.marcielvarini.com.br
-            
+
+            #Force o reset antes do pull no script
             git fetch --all
             git reset --hard origin/main
-            
+
+            # Instala dependências
             composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-            
+
+            # Roda migrações e limpa caches
             php artisan migrate --force
+
+            # Limpa TUDO e reotimiza
+            php artisan config:clear
+            php artisan route:clear
+            php artisan view:clear
             php artisan optimize
+            
+            # Reinicia o PHP-FPM (Opcional, mas resolve 90% dos casos de cache persistente)
+            # sudo systemctl restart php8.x-fpm
