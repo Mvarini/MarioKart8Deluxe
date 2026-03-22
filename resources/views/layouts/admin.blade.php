@@ -21,7 +21,7 @@
     <button class="btn btn-link order-1 order-lg-0  ms-1 text-white" id="sidebarToggle"><i
             class="fas fa-bars fa-lg"></i></button>
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-2" href="{{ route('web.index') }}">Mario Kart</a>
+    <a class="navbar-brand ps-2" href="{{ route('web.index') }}">Mario Kart 8</a>
 
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
